@@ -15,7 +15,6 @@ else
         {
             Console.WriteLine("Kobieta poniżej 30 lat");
         }
-
     }
     else
     {
