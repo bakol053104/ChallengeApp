@@ -1,17 +1,16 @@
-﻿var name = "Ewa";
-var age = 13;
-var sex = 'K'; // K- kobieta, M- mężczyzna
+﻿var number = 1223445667778888990;
+var numberInString = number.ToString();
+var letters = numberInString.ToArray();
+var CountersDigit = new int[10];
 
-if (name == "Ewa" && age == 30)
+foreach (var digit in letters)
 {
-    Console.WriteLine("Ewa, lat 30");
+    CountersDigit[digit - 48]++; // minus nr znaku cyfry 0 w tablicy ASCII
 }
-else if (sex == 'K' && age < 30)
-     {
-        Console.WriteLine("Kobieta poniżej 30 lat");
-     }
-    else if (age < 18)
-         {
-            Console.WriteLine("Niepełnoletni mężczyzna");
-         }
 
+Console.WriteLine($"{number}\n");
+
+for (var i=0; i<CountersDigit.Length; i++)
+{
+    Console.WriteLine($"{i}=> {CountersDigit[i]}");
+}
