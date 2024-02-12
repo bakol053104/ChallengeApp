@@ -1,8 +1,8 @@
 ﻿namespace ChallengeApp
 {
-    class Employee
+    public class Employee
     {
-        private List<int> grades = new List<int>();
+        public List<int> grades = new List<int>();
 
         public Employee(string name, string surname, int age)
         {
@@ -27,8 +27,38 @@
 
         public void AddGrade(int grade)
         {
-            this.grades.Add(grade);
+            if (grade >= 1 && grade <= 10)
+            {
+                this.grades.Add(grade);
+            }
+        }
+        public void SetPenaltyPoints(int points)
+        {
+
+            if (points > 0) return;
+
+            var index = SearchPenaltyPointsInGrades();
+            if (index == -1)
+            {
+                this.grades.Add(points);
+            }
+            else
+            {
+                this.grades[index] = points;
+            }
+
         }
 
+        private int SearchPenaltyPointsInGrades()
+        {
+            var index = 0;
+            foreach (var grade in grades)
+            {
+                if (grade <= 0) return index;
+                index++;
+            }
+            return -1;
+
+        }
     }
 }

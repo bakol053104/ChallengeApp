@@ -6,11 +6,12 @@ Employee employee3 = new Employee("Imie_3", "Nazwisko_3", 23);
 
 List<Employee> employees = new List<Employee>();
 
-employee1.AddGrade(1);
-employee1.AddGrade(5);
-employee1.AddGrade(7);
-employee1.AddGrade(6);
-employee1.AddGrade(9);
+employee1.AddGrade(10);
+employee1.AddGrade(10);
+employee1.AddGrade(10);
+employee1.AddGrade(10);
+employee1.AddGrade(10);
+employee1.SetPenaltyPoints(-10);
 Console.WriteLine($"{employee1.Name} {employee1.Surname} Wiek: {employee1.Age} Ocena: {employee1.Result} ");
 
 employee2.AddGrade(2);
