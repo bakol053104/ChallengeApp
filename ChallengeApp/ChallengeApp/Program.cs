@@ -19,6 +19,6 @@ var statisticDoWhile = employee.GetStattisticsWithDoWhile();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
 Console.WriteLine($"Średnia ocen: {statisticDoWhile.Average:N2} Min: {statisticDoWhile.Min} Max: {statisticDoWhile.Max} - pętla DoWhile ");
 
-var statisticWhile = employee.GetStattisticsWithWhie();
+var statisticWhile = employee.GetStattisticsWithWhile();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
 Console.WriteLine($"Średnia ocen: {statisticWhile.Average:N2} Min: {statisticWhile.Min} Max: {statisticWhile.Max} - pętla While");

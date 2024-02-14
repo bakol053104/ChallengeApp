@@ -116,7 +116,7 @@
             return statistics;
         }
 
-        public Statistics GetStattisticsWithWhie()
+        public Statistics GetStattisticsWithWhile()
         {
             var statistics = new Statistics();
             statistics.Average = 0;
