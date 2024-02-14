@@ -16,8 +16,48 @@
 
         public void AddGrade(float grade)
         {
+            if (grade >= 0 && grade <= 100)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine("Błędna wartość oceny");
+            }
 
-            this.grades.Add(grade);
+        }
+
+        public void AddGrade(double grade)
+        {
+            this.grades.Add((float)grade);
+        }
+
+        public void AddGrade(long grade)
+        {
+            this.grades.Add((float)grade);
+        }
+
+        public void AddGrade(byte grade)
+        {
+            this.grades.Add((float)grade);
+        }
+
+        public void AddGrade(int grade)
+        {
+            this.grades.Add((float)grade);
+        }
+
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))
+            {
+                this.grades.Add(result);
+            }
+            else
+            {
+                Console.WriteLine("Łańcuch znaków nie jest liczbą");
+            }
+
         }
 
         public Statistics GetStattistics()

@@ -1,11 +1,11 @@
 ﻿using ChallengeApp;
 
 var employee = new Employee ("Imie_1", "Nazwisko_1");
-employee.AddGrade(5);
-employee.AddGrade(6);   
-employee.AddGrade(7);
-employee.AddGrade(7);
-employee.AddGrade(10);
+employee.AddGrade("2");
+employee.AddGrade((double)6);   
+employee.AddGrade((long)7);
+employee.AddGrade(7.5);
+employee.AddGrade((byte)10);
 
 var statistics = employee.GetStattistics();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
