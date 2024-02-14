@@ -15,10 +15,10 @@ var statisticsFor = employee.GetStattisticsWithFor();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
 Console.WriteLine($"Średnia ocen: {statisticsFor.Average:N2} Min: {statisticsFor.Min} Max: {statisticsFor.Max} ");
 
-var statisticDoWhile = employee.GetStattisticsWithFor();
+var statisticDoWhile = employee.GetStattisticsWithDoWhile();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
 Console.WriteLine($"Średnia ocen: {statisticDoWhile.Average:N2} Min: {statisticDoWhile.Min} Max: {statisticDoWhile.Max} ");
 
-var statisticWhile = employee.GetStattisticsWithFor();
+var statisticWhile = employee.GetStattisticsWithWhie();
 Console.WriteLine($"\n{employee.Name} {employee.Surname}");
 Console.WriteLine($"Średnia ocen: {statisticWhile.Average:N2} Min: {statisticWhile.Min} Max: {statisticWhile.Max} ");
