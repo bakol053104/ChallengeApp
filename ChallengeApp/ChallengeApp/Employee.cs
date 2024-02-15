@@ -53,7 +53,7 @@ namespace ChallengeApp
         {
             if (float.TryParse(grade, out float result))
             {
-                this.grades.Add(result);
+                AddGrade(result);
             }
             else
             {
