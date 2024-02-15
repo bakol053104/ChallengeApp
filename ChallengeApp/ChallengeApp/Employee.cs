@@ -16,7 +16,7 @@ namespace ChallengeApp
 
         public string Surname { get; private set; }
 
-        public void AddGrade(float grade)
+        private void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -24,46 +24,67 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("Błędna wartość oceny");
+                Console.WriteLine("\nBłędna wartość oceny");
             }
 
         }
 
-        public void AddGrade(double grade)
+        public void AddGrade(char grade)
         {
-            AddGrade((float)grade);
-        }
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    AddGrade(20);
+                    break;
+                default:
+                    Console.WriteLine("Wprowadzono nieprawidłową literę\n");
+                    break;
+            }
 
-        public void AddGrade(long grade)
-        {
-            AddGrade((float)grade);
-        }
-
-        public void AddGrade(byte grade)
-        {
-            AddGrade((float)grade);
-        }
-
-        public void AddGrade(int grade)
-        {
-            AddGrade((float)grade);
         }
 
         public void AddGrade(string grade)
+
         {
-            if (float.TryParse(grade, out float result))
+            if ((grade.Length == 1) && ((grade[0] >= 'A' && grade[0] <= 'Z') || (grade[0] >= 'a' && grade[0] <= 'z')))
+            {
+                AddGrade(grade[0]);
+            }
+            else if (float.TryParse(grade, out float result))
             {
                 AddGrade(result);
             }
             else
             {
-                Console.WriteLine("Łańcuch znaków nie jest liczbą");
+                Console.WriteLine("Łańcuch znaków nie jest liczbą\n");
             }
 
         }
 
+
         public Statistics GetStattistics()
         {
+            if (this.grades.Count == 0)
+            {
+                return null;
+            }
             var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
@@ -77,7 +98,30 @@ namespace ChallengeApp
             }
             statistics.Average = statistics.Average / this.grades.Count;
 
+            switch (statistics.Average)
+            {
+                case var average when average > 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var average when average > 60 && average <= 80:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average > 40 && average <= 60:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average > 20 && average <= 40:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+
+                    statistics.AverageLetter = 'E';
+                    break;
+
+            }
+
+
             return statistics;
+
         }
 
     }
