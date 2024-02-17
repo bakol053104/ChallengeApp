@@ -1,6 +1,4 @@
-﻿using ChallengeApp;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public class Employee
     {
@@ -24,12 +22,12 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("\nBłędna wartość oceny");
+                throw new Exception("[Błędna wartość oceny]");
             }
 
         }
 
-        public void AddGrade(char grade)
+        private void AddGrade(char grade)
         {
             switch (grade)
             {
@@ -54,8 +52,7 @@ namespace ChallengeApp
                     AddGrade(20);
                     break;
                 default:
-                    Console.WriteLine("Wprowadzono nieprawidłową literę\n");
-                    break;
+                    throw new Exception("[Wprowadzono nieprawidłową literę]");
             }
 
         }
@@ -73,11 +70,10 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("Łańcuch znaków nie jest liczbą\n");
+                throw new Exception("[Łańcuch znaków nie jest liczbą]");
             }
 
         }
-
 
         public Statistics GetStattistics()
         {
@@ -118,10 +114,7 @@ namespace ChallengeApp
                     break;
 
             }
-
-
             return statistics;
-
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using ChallengeApp;
-using System;
 
 Console.WriteLine("Witamy  w programie do oceny pracowników");
 Console.WriteLine("========================================");
@@ -9,15 +8,25 @@ var employee = new Employee("Imie_1", "Nazwisko_1");
 
 while (true)
 {
-    Console.WriteLine("\nPodaj ocenę pracownika:");
+    Console.WriteLine("Podaj ocenę pracownika:");
     var input = Console.ReadLine();
     if (input == "q" || input == "Q")
     {
         break;
     }
-    employee.AddGrade(input);
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine($"\nWywołanie wyjątku: {exception.Message}");
+    }
+    finally
+    {
+        Console.WriteLine();
+    }
 }
-
 var statistics = employee.GetStattistics();
 if (statistics != null)
 {
