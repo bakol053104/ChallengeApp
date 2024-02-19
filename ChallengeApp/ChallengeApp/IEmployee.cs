@@ -1,12 +1,14 @@
 ﻿namespace ChallengeApp
 {
-    public interface IEmployee
+    public interface IEmployee    
     {
         string Name { get; }
 
         string Surname { get; }
 
-        string Jobpost { get; }
+        string JobPost { get; }
+
+        void AddGrade(float grade);
 
         void AddGrade(string grade);
 

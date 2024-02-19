@@ -1,98 +1,60 @@
 ﻿using ChallengeApp;
 
-var employee = new Employee("Imie_1", "Nazwisko_1");
-var supervisor = new Supervisor("Imie_2", "Nazwisko_2");
+var employee = new EmployeeInFile("Imie_1", "Nazwisko_1", "Kierownik");
+var emp = employee;
 
 Console.WriteLine("\tWitamy  w programie do oceny pracowników");
 Console.WriteLine("=========================================================\n");
 
-var emp = employee;
-
-while (true)
+if (emp.JobPost == "Kierownik")
 {
-    if (emp.Jobpost == "Kierownik")
-    {
-        Console.WriteLine($"Podaj ocenę ( 1,2,3,4,5,6 +/-) dla stanowiska {emp.Jobpost}:");
-    }
-    else
-    {
-        Console.WriteLine($"Podaj ocenę ( 0-100 lub A[a]-E[e] ) dla stanowiska {emp.Jobpost}:");
-    }
-
-    var input = Console.ReadLine();
-    if (input == "q" || input == "Q")
-    {
-        break;
-    }
-    try
-    {
-        emp.AddGrade(input);
-    }
-    catch (Exception exception)
-    {
-        Console.WriteLine($"\nWywołanie wyjątku: {exception.Message}");
-    }
-    finally
-    {
-        Console.WriteLine();
-    }
+    Console.WriteLine($"Oceny ( 1,2,3,4,5,6 +/-) dla stanowiska {emp.JobPost}:");
+    UserInterface();
 }
-var statistics = emp.GetStattistics();
-if (statistics != null)
+else if (emp.JobPost == "Pracownik")
 {
-    Console.WriteLine($"\n{emp.Name}  {emp.Surname}");
-    Console.WriteLine($"Średnia ocena liczbowa: {statistics.Average:N2}");
-    Console.WriteLine($"Średnia ocena szkolna: {statistics.AverageLetter}");
-    Console.WriteLine($"Min: {statistics.Min:N2}");
-    Console.WriteLine($"Max: {statistics.Max:N2}");
+    Console.WriteLine($"Oceny ( 0-100 lub E[e]-A[a] ) dla stanowiska {emp.JobPost}:");
+    UserInterface();
 }
 else
 {
-    Console.WriteLine($"\nBrak wprowadzonych ocen pracownika");
+    Console.WriteLine($"Wprowadzono nieprawidłowe stanowisko pracy");
 }
-
-var super = supervisor;
-
-while (true)
+void UserInterface()
 {
-    if (super.Jobpost == "Kierownik")
+    while (true)
     {
-        Console.WriteLine($"Podaj ocenę ( 1,2,3,4,5,6 +/-) dla stanowiska {super.Jobpost}:");
+        Console.WriteLine($"Podaj ocenę: ");
+        var input = Console.ReadLine();
+        if (input == "q" || input == "Q")
+        {
+            break;
+        }
+        try
+        {
+            emp.AddGrade(input);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"\nWywołanie wyjątku: {exception.Message}");
+        }
+        finally
+        {
+            Console.WriteLine();
+        }
     }
-    else
-    {
-        Console.WriteLine($"Podaj ocenę ( 0-100 lub A[a]-E[e] ) dla stanowiska {super.Jobpost}:");
-    }
-
-    var input = Console.ReadLine();
-    if (input == "q" || input == "Q")
-    {
-        break;
-    }
-    try
-    {
-        super.AddGrade(input);
-    }
-    catch (Exception exception)
-    {
-        Console.WriteLine($"\nWywołanie wyjątku: {exception.Message}");
-    }
-    finally
-    {
-        Console.WriteLine();
-    }
+        var statistics = emp.GetStattistics();
+        if (statistics != null)
+        {
+            Console.WriteLine($"\n{emp.Name}  {emp.Surname}");
+            Console.WriteLine($"Średnia ocena liczbowa: {statistics.Average:N2}");
+            Console.WriteLine($"Średnia ocena szkolna: {statistics.AverageLetter}");
+            Console.WriteLine($"Min: {statistics.Min:N2}");
+            Console.WriteLine($"Max: {statistics.Max:N2}");
+        }
+        else
+        {
+            Console.WriteLine($"\nBrak wprowadzonych ocen pracownika");
+        }
+  
 }
-var statistics1 = super.GetStattistics();
-if (statistics1 != null)
-{
-    Console.WriteLine($"\n{super.Name}  {super.Surname}");
-    Console.WriteLine($"Średnia ocena liczbowa: {statistics1.Average:N2}");
-    Console.WriteLine($"Średnia ocena szkolna: {statistics1.AverageLetter}");
-    Console.WriteLine($"Min: {statistics1.Min:N2}");
-    Console.WriteLine($"Max: {statistics1.Max:N2}\n");
-}
-else
-{
-    Console.WriteLine($"\nBrak wprowadzonych ocen pracownika");
-}
-
