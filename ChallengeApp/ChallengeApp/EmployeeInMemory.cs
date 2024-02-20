@@ -2,7 +2,8 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
-        public EmployeeInMemory(string name, string surname, string jobpost) 
+
+        public EmployeeInMemory(string name, string surname, string jobpost)
             : base(name, surname, jobpost)
         {
         }
@@ -12,6 +13,7 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                CallEventGradeAdded();
             }
             else
             {

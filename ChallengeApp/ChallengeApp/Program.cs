@@ -3,6 +3,9 @@
 var employee = new EmployeeInFile("Imie_1", "Nazwisko_1", "Kierownik");
 var emp = employee;
 
+emp.GradeAdded += EmployeeGradeAdded;
+
+
 Console.WriteLine("\tWitamy  w programie do oceny pracowników");
 Console.WriteLine("=========================================================\n");
 
@@ -20,6 +23,12 @@ else
 {
     Console.WriteLine($"Wprowadzono nieprawidłowe stanowisko pracy");
 }
+
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę");
+}
+
 void UserInterface()
 {
     while (true)

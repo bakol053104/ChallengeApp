@@ -11,6 +11,10 @@
             this.JobPost = jobpost;
         }
 
+        public delegate void GradeAdddedDelegate(object sender, EventArgs args);
+
+        public event GradeAdddedDelegate GradeAdded;
+
         public string Name { get; private set; }
 
         public string Surname { get; private set; }
@@ -20,106 +24,6 @@
         public abstract void AddGrade(float grade);
 
         public abstract Statistics GetStattistics();
-
-        private void AddGrade(char grade)
-        {
-            switch (grade)
-            {
-                case 'A':
-                case 'a':
-                    AddGrade(100);
-                    break;
-                case 'B':
-                case 'b':
-                    AddGrade(80);
-                    break;
-                case 'C':
-                case 'c':
-                    AddGrade(60);
-                    break;
-                case 'D':
-                case 'd':
-                    AddGrade(40);
-                    break;
-                case 'E':
-                case 'e':
-                    AddGrade(20);
-                    break;
-                default:
-                    throw new Exception("[Wprowadzono nieprawidłową literę]");
-            }
-
-        }
-
-        protected Statistics CalculateStattistics()
-        {
-            if (this.grades.Count == 0)
-            {
-                return null;
-            }
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            foreach (var grade in this.grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-            statistics.Average = statistics.Average / this.grades.Count;
-
-            switch (JobPost)
-            {
-                case "Pracownik":
-                    switch (statistics.Average)
-                    {
-                        case var average when average > 80:
-                            statistics.AverageLetter = 'A';
-                            break;
-                        case var average when average > 60 && average <= 80:
-                            statistics.AverageLetter = 'B';
-                            break;
-                        case var average when average > 40 && average <= 60:
-                            statistics.AverageLetter = 'C';
-                            break;
-                        case var average when average > 20 && average <= 40:
-                            statistics.AverageLetter = 'D';
-                            break;
-                        default:
-                            statistics.AverageLetter = 'E';
-                            break;
-
-                    }
-                    break;
-                case "Kierownik":
-                    switch (statistics.Average)
-                    {
-                        case var average when average >= 95:
-                            statistics.AverageLetter = '6';
-                            break;
-                        case var average when average >= 75 && average < 95:
-                            statistics.AverageLetter = '5';
-                            break;
-                        case var average when average >= 55 && average < 75:
-                            statistics.AverageLetter = '4';
-                            break;
-                        case var average when average > 35 && average < 55:
-                            statistics.AverageLetter = '3';
-                            break;
-                        case var average when average > 15 && average < 35:
-                            statistics.AverageLetter = '2';
-                            break;
-                        default:
-                            statistics.AverageLetter = '1';
-                            break;
-
-                    }
-                    break;
-            }
-            return statistics;
-        }
 
         public void AddGrade(string grade)
         {
@@ -185,5 +89,110 @@
 
         }
 
+        protected Statistics CalculateStattistics()
+        {
+            if (this.grades.Count == 0)
+            {
+                return null;
+            }
+            var statistics = new Statistics();
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            foreach (var grade in this.grades)
+            {
+                statistics.Max = Math.Max(statistics.Max, grade);
+                statistics.Min = Math.Min(statistics.Min, grade);
+                statistics.Average += grade;
+            }
+            statistics.Average = statistics.Average / this.grades.Count;
+
+            switch (JobPost)
+            {
+                case "Pracownik":
+                    switch (statistics.Average)
+                    {
+                        case var average when average > 80:
+                            statistics.AverageLetter = 'A';
+                            break;
+                        case var average when average > 60 && average <= 80:
+                            statistics.AverageLetter = 'B';
+                            break;
+                        case var average when average > 40 && average <= 60:
+                            statistics.AverageLetter = 'C';
+                            break;
+                        case var average when average > 20 && average <= 40:
+                            statistics.AverageLetter = 'D';
+                            break;
+                        default:
+                            statistics.AverageLetter = 'E';
+                            break;
+                    }
+                    break;
+                case "Kierownik":
+                    switch (statistics.Average)
+                    {
+                        case var average when average >= 95:
+                            statistics.AverageLetter = '6';
+                            break;
+                        case var average when average >= 75 && average < 95:
+                            statistics.AverageLetter = '5';
+                            break;
+                        case var average when average >= 55 && average < 75:
+                            statistics.AverageLetter = '4';
+                            break;
+                        case var average when average > 35 && average < 55:
+                            statistics.AverageLetter = '3';
+                            break;
+                        case var average when average > 15 && average < 35:
+                            statistics.AverageLetter = '2';
+                            break;
+                        default:
+                            statistics.AverageLetter = '1';
+                            break;
+                    }
+                    break;
+            }
+            return statistics;
+        }
+
+        protected void CallEventGradeAdded()
+        {
+            if (GradeAdded != null)
+            {
+                GradeAdded(this, new EventArgs());
+            }
+        }
+
+        private void AddGrade(char grade)
+        {
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    AddGrade(20);
+                    break;
+                default:
+                    throw new Exception("[Wprowadzono nieprawidłową literę]");
+            }
+
+        }
     }
 }

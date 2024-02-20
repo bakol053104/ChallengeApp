@@ -4,8 +4,8 @@
     {
         private const string fileName = "grades.txt";
 
-        public EmployeeInFile(string name, string surname, string jobpost) 
-            : base(name, surname, jobpost)
+        public EmployeeInFile(string name, string surname, string jobpost)
+       : base(name, surname, jobpost)
         {
         }
 
@@ -14,6 +14,7 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                CallEventGradeAdded();
             }
             else
             {
