@@ -2,9 +2,8 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
-
-        public EmployeeInMemory(string name, string surname, string jobpost)
-            : base(name, surname, jobpost)
+        public EmployeeInMemory(string name, string surname)
+            : base(name, surname)
         {
         }
 

@@ -1,17 +1,22 @@
-﻿namespace ChallengeApp
+﻿using static ChallengeApp.EmployeeBase;
+
+namespace ChallengeApp
 {
     public interface IEmployee    
     {
-        string Name { get; }
+        public interface IEmployee
+        {
+            string Name { get; }
 
-        string Surname { get; }
+            string Surname { get; }
 
-        string JobPost { get; }
+            void AddGrade(float grade);
 
-        void AddGrade(float grade);
+            void AddGrade(string grade);
 
-        void AddGrade(string grade);
+            event GradeAdddedDelegate GradeAdded;
 
-        Statistics GetStattistics();
+            Statistics GetStattistics();
+        }
     }
 }
