@@ -2,8 +2,6 @@
 {
     public abstract class EmployeeBase : IEmployee
     {
-        protected List<float> grades = new List<float>();
-
         public EmployeeBase(string name, string surname)
         {
             this.Name = name;
@@ -27,7 +25,6 @@
         public void AddGrade(string grade)
         {
             if (grade.Length >= 1 && grade.Length <= 2)
-
             {
                 float result = 0;
                 int index = 0;
@@ -67,17 +64,6 @@
             }
         }
 
-        protected Statistics CalculateStattistics()
-        {
-            Statistics statistics = new Statistics();
-
-            foreach (var grade in this.grades)
-            {
-                statistics.AddGrade(grade);
-            }
-            return statistics;
-        }
-
         protected void CallEventGradeAdded()
         {
             if (GradeAdded != null)
@@ -85,6 +71,5 @@
                 GradeAdded(this, new EventArgs());
             }
         }
-
     }
 }

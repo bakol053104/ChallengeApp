@@ -2,6 +2,7 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
+        private List<float> grades = new List<float>();
         public EmployeeInMemory(string name, string surname)
             : base(name, surname)
         {
@@ -19,9 +20,23 @@
                 throw new Exception("[Błędna wartość oceny]");
             }
         }
+
         public override Statistics GetStattistics()
         {
-            return CalculateStattistics();
+            Statistics statistics = new Statistics();
+
+            if (this.grades.Count > 0)
+            {
+                foreach (var grade in this.grades)
+                {
+                    statistics.AddGrade(grade);
+                }
+            }
+            else
+            {
+                throw new Exception("[Brak wprowadzonych ocen]");
+            }
+            return statistics;
         }
     }
 }

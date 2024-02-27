@@ -14,7 +14,7 @@
         {
             get
             {
-                return this.Sum / this.Count;
+                return this.Count!= 0 ? this.Sum / this.Count : 0;
             }
         }
 
@@ -51,7 +51,6 @@
                     default:
                         return 'E';
                 }
-
             }
         }
     }

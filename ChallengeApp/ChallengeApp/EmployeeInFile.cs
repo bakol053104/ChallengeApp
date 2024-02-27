@@ -7,45 +7,31 @@
         public EmployeeInFile(string name, string surname)
        : base(name, surname)
         {
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
         }
 
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
-                this.grades.Add(grade);
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                }
                 CallEventGradeAdded();
             }
             else
             {
                 throw new Exception("[Błędna wartość oceny]");
             }
-
-            WriteGradesToFile();
         }
 
         public override Statistics GetStattistics()
         {
-            ReadGradesFromFile();
-            return CalculateStattistics();
-        }
-
-        private void WriteGradesToFile()
-        {
-            if (File.Exists(fileName)) { File.Delete(fileName); }
-
-            foreach (var grade in grades)
-            {
-                using (var writer = File.AppendText(fileName))
-                {
-                    writer.WriteLine(grade);
-                }
-            }
-        }
-
-        private void ReadGradesFromFile()
-        {
-            grades.Clear();
+            Statistics statistics = new Statistics();
 
             if (File.Exists(fileName))
             {
@@ -55,7 +41,7 @@
                     while (line != null)
                     {
                         var number = float.Parse(line);
-                        this.grades.Add(number);
+                        statistics.AddGrade(number);
                         line = reader.ReadLine();
                     }
                 }
@@ -64,7 +50,7 @@
             {
                 throw new Exception("[Nie znaleziono pliku grades.txt]");
             }
-
+            return statistics;
         }
     }
 }

@@ -41,17 +41,21 @@ void UserInterface()
         }
 
     }
-    var statistics = emp.GetStattistics();
-    if (statistics != null)
+    try
     {
+        var statistics = emp.GetStattistics();
         Console.WriteLine($"\n{emp.Name}  {emp.Surname}");
         Console.WriteLine($"Średnia ocena liczbowa: {statistics.Average:N2}");
         Console.WriteLine($"Średnia ocena szkolna: {statistics.AverageLetter}");
         Console.WriteLine($"Min: {statistics.Min:N2}");
         Console.WriteLine($"Max: {statistics.Max:N2}");
     }
-    else
+    catch (Exception exception)
     {
-        Console.WriteLine($"\nBrak wprowadzonych ocen pracownika");
+        Console.WriteLine($"\nWywołanie wyjątku: {exception.Message}");
+    }
+    finally
+    {
+        Console.WriteLine();
     }
 }
